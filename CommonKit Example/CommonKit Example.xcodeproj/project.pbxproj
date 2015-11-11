@@ -11,6 +11,12 @@
 		DE0BCD641BF18E9A000F15A9 /* QYDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0BCD631BF18E9A000F15A9 /* QYDeviceInfo.m */; };
 		DE0BCD671BF19006000F15A9 /* QYUDIDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0BCD661BF19006000F15A9 /* QYUDIDHelper.m */; };
 		DE0BCD6A1BF191BB000F15A9 /* QYKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0BCD691BF191BB000F15A9 /* QYKeychain.m */; };
+		DE0BCD7E1BF2D3BE000F15A9 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0BCD7A1BF2D3BE000F15A9 /* NSString+MD5.m */; };
+		DE0BCD7F1BF2D3BE000F15A9 /* NSString+Sha1.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0BCD7C1BF2D3BE000F15A9 /* NSString+Sha1.m */; };
+		DE0BCD851BF2D3ED000F15A9 /* NSString+ValidateCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0BCD841BF2D3ED000F15A9 /* NSString+ValidateCheck.m */; };
+		DE0BCD881BF2D79B000F15A9 /* NSArray+QYSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0BCD871BF2D79B000F15A9 /* NSArray+QYSafe.m */; };
+		DE0BCD8C1BF2D924000F15A9 /* NSMutableArray+QYSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0BCD8B1BF2D924000F15A9 /* NSMutableArray+QYSafe.m */; };
+		DE0BCD8F1BF2DF51000F15A9 /* QYObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0BCD8E1BF2DF51000F15A9 /* QYObject.m */; };
 		DEEBDED21BF1704B003283F2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DEEBDED11BF1704B003283F2 /* main.m */; };
 		DEEBDED51BF1704B003283F2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DEEBDED41BF1704B003283F2 /* AppDelegate.m */; };
 		DEEBDED81BF1704B003283F2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEEBDED71BF1704B003283F2 /* ViewController.m */; };
@@ -28,6 +34,19 @@
 		DE0BCD661BF19006000F15A9 /* QYUDIDHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYUDIDHelper.m; sourceTree = "<group>"; };
 		DE0BCD681BF191BB000F15A9 /* QYKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYKeychain.h; sourceTree = "<group>"; };
 		DE0BCD691BF191BB000F15A9 /* QYKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYKeychain.m; sourceTree = "<group>"; };
+		DE0BCD791BF2D3BE000F15A9 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		DE0BCD7A1BF2D3BE000F15A9 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
+		DE0BCD7B1BF2D3BE000F15A9 /* NSString+Sha1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Sha1.h"; sourceTree = "<group>"; };
+		DE0BCD7C1BF2D3BE000F15A9 /* NSString+Sha1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Sha1.m"; sourceTree = "<group>"; };
+		DE0BCD831BF2D3ED000F15A9 /* NSString+ValidateCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ValidateCheck.h"; sourceTree = "<group>"; };
+		DE0BCD841BF2D3ED000F15A9 /* NSString+ValidateCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ValidateCheck.m"; sourceTree = "<group>"; };
+		DE0BCD861BF2D79B000F15A9 /* NSArray+QYSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+QYSafe.h"; sourceTree = "<group>"; };
+		DE0BCD871BF2D79B000F15A9 /* NSArray+QYSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+QYSafe.m"; sourceTree = "<group>"; };
+		DE0BCD891BF2D865000F15A9 /* QYMacroDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYMacroDefinition.h; sourceTree = "<group>"; };
+		DE0BCD8A1BF2D924000F15A9 /* NSMutableArray+QYSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QYSafe.h"; sourceTree = "<group>"; };
+		DE0BCD8B1BF2D924000F15A9 /* NSMutableArray+QYSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QYSafe.m"; sourceTree = "<group>"; };
+		DE0BCD8D1BF2DF51000F15A9 /* QYObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYObject.h; sourceTree = "<group>"; };
+		DE0BCD8E1BF2DF51000F15A9 /* QYObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYObject.m; sourceTree = "<group>"; };
 		DEEBDECD1BF1704B003283F2 /* CommonKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CommonKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEEBDED11BF1704B003283F2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DEEBDED31BF1704B003283F2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -54,6 +73,16 @@
 		DE0BCD5B1BF18D7B000F15A9 /* QYCategories */ = {
 			isa = PBXGroup;
 			children = (
+				DE0BCD791BF2D3BE000F15A9 /* NSString+MD5.h */,
+				DE0BCD7A1BF2D3BE000F15A9 /* NSString+MD5.m */,
+				DE0BCD7B1BF2D3BE000F15A9 /* NSString+Sha1.h */,
+				DE0BCD7C1BF2D3BE000F15A9 /* NSString+Sha1.m */,
+				DE0BCD861BF2D79B000F15A9 /* NSArray+QYSafe.h */,
+				DE0BCD871BF2D79B000F15A9 /* NSArray+QYSafe.m */,
+				DE0BCD8A1BF2D924000F15A9 /* NSMutableArray+QYSafe.h */,
+				DE0BCD8B1BF2D924000F15A9 /* NSMutableArray+QYSafe.m */,
+				DE0BCD831BF2D3ED000F15A9 /* NSString+ValidateCheck.h */,
+				DE0BCD841BF2D3ED000F15A9 /* NSString+ValidateCheck.m */,
 			);
 			name = QYCategories;
 			path = ../QYCategories;
@@ -78,6 +107,9 @@
 		DE0BCD5D1BF18D7B000F15A9 /* QYFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				DE0BCD891BF2D865000F15A9 /* QYMacroDefinition.h */,
+				DE0BCD8D1BF2DF51000F15A9 /* QYObject.h */,
+				DE0BCD8E1BF2DF51000F15A9 /* QYObject.m */,
 			);
 			name = QYFoundation;
 			path = ../QYFoundation;
@@ -207,11 +239,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEEBDED81BF1704B003283F2 /* ViewController.m in Sources */,
+				DE0BCD881BF2D79B000F15A9 /* NSArray+QYSafe.m in Sources */,
 				DE0BCD671BF19006000F15A9 /* QYUDIDHelper.m in Sources */,
+				DE0BCD851BF2D3ED000F15A9 /* NSString+ValidateCheck.m in Sources */,
 				DE0BCD611BF18E06000F15A9 /* QYAppInfo.m in Sources */,
+				DE0BCD8F1BF2DF51000F15A9 /* QYObject.m in Sources */,
+				DE0BCD8C1BF2D924000F15A9 /* NSMutableArray+QYSafe.m in Sources */,
+				DE0BCD7E1BF2D3BE000F15A9 /* NSString+MD5.m in Sources */,
 				DEEBDED51BF1704B003283F2 /* AppDelegate.m in Sources */,
 				DE0BCD6A1BF191BB000F15A9 /* QYKeychain.m in Sources */,
 				DEEBDED21BF1704B003283F2 /* main.m in Sources */,
+				DE0BCD7F1BF2D3BE000F15A9 /* NSString+Sha1.m in Sources */,
 				DE0BCD641BF18E9A000F15A9 /* QYDeviceInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

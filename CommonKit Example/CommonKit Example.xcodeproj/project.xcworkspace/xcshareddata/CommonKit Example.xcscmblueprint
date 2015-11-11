@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "94F1D991FEFD0D722CD8D40CC3602D656B0C53CF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "0BF1E530140190EB87F33ECAA2C7E95C877E3D1B" : 0,
+    "94F1D991FEFD0D722CD8D40CC3602D656B0C53CF" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B99049DF-A4F7-42DD-9661-BAEB2E576B0D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "0BF1E530140190EB87F33ECAA2C7E95C877E3D1B" : "..\/loukou_ios\/loukou",
+    "94F1D991FEFD0D722CD8D40CC3602D656B0C53CF" : "QYCommonKit\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CommonKit Example",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "CommonKit Example\/CommonKit Example.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "10.11.1.13:iOS\/LouKou.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0BF1E530140190EB87F33ECAA2C7E95C877E3D1B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:zhangqingyv\/QYCommonKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "94F1D991FEFD0D722CD8D40CC3602D656B0C53CF"
+    }
+  ]
+}
