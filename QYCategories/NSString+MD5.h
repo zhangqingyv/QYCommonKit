@@ -1,6 +1,6 @@
 //
 //  NSString+MD5.h
-//  LSFoundation
+//  CommonKit Example
 //
 //  Created by liulihui on 15/2/6.
 //  Copyright (c) 2015年 liulihui. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  NSString+ValidateCheck.h
-//  LSFoundation
+//  CommonKit Example
 //
 //  Created by liulihui on 15/2/5.
 //  Copyright (c) 2015年 liulihui. All rights reserved.

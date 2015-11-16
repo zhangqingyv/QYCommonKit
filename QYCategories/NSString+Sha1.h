@@ -1,6 +1,6 @@
 //
 //  NSString+Sha1.h
-//  LSFoundation
+//  CommonKit Example
 //
 //  Created by 白开水_孙 on 8/3/15.
 //  Copyright © 2015 liulihui. All rights reserved.
