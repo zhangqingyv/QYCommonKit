@@ -7,7 +7,7 @@
 //
 
 #import "NSArray+QYSafe.h"
-#import "QYObject.h"
+#import "QYMacroDefinition.h"
 
 @implementation NSArray (QYSafe)
 
@@ -21,7 +21,7 @@
 
 + (void)swizzleSelector
 {
-    LKF_swizzleSelector([self class], @selector(objectAtIndexedSubscript:), @selector(LKF_objectAtIndexedSubscript:));
+    QY_swizzleSelector([self class], @selector(objectAtIndexedSubscript:), @selector(LKF_objectAtIndexedSubscript:));
 }
 
 /**

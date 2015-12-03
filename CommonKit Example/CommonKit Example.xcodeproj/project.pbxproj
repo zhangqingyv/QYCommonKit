@@ -16,7 +16,6 @@
 		DE0BCD851BF2D3ED000F15A9 /* NSString+ValidateCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0BCD841BF2D3ED000F15A9 /* NSString+ValidateCheck.m */; };
 		DE0BCD881BF2D79B000F15A9 /* NSArray+QYSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0BCD871BF2D79B000F15A9 /* NSArray+QYSafe.m */; };
 		DE0BCD8C1BF2D924000F15A9 /* NSMutableArray+QYSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0BCD8B1BF2D924000F15A9 /* NSMutableArray+QYSafe.m */; };
-		DE0BCD8F1BF2DF51000F15A9 /* QYObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0BCD8E1BF2DF51000F15A9 /* QYObject.m */; };
 		DE3D550F1BF9DF600096A037 /* UIView+QYFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3D550E1BF9DF600096A037 /* UIView+QYFrame.m */; };
 		DE3D55151BF9E07E0096A037 /* UIView+QYAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3D55141BF9E07E0096A037 /* UIView+QYAutoLayout.m */; };
 		DE3D55181BF9E2080096A037 /* UIColor+QYHex.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3D55171BF9E2080096A037 /* UIColor+QYHex.m */; };
@@ -48,8 +47,6 @@
 		DE0BCD891BF2D865000F15A9 /* QYMacroDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYMacroDefinition.h; sourceTree = "<group>"; };
 		DE0BCD8A1BF2D924000F15A9 /* NSMutableArray+QYSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QYSafe.h"; sourceTree = "<group>"; };
 		DE0BCD8B1BF2D924000F15A9 /* NSMutableArray+QYSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QYSafe.m"; sourceTree = "<group>"; };
-		DE0BCD8D1BF2DF51000F15A9 /* QYObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYObject.h; sourceTree = "<group>"; };
-		DE0BCD8E1BF2DF51000F15A9 /* QYObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYObject.m; sourceTree = "<group>"; };
 		DE3D550C1BF9DE8A0096A037 /* QYCommonKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYCommonKit.h; sourceTree = "<group>"; };
 		DE3D550D1BF9DF600096A037 /* UIView+QYFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+QYFrame.h"; sourceTree = "<group>"; };
 		DE3D550E1BF9DF600096A037 /* UIView+QYFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+QYFrame.m"; sourceTree = "<group>"; };
@@ -124,8 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				DE0BCD891BF2D865000F15A9 /* QYMacroDefinition.h */,
-				DE0BCD8D1BF2DF51000F15A9 /* QYObject.h */,
-				DE0BCD8E1BF2DF51000F15A9 /* QYObject.m */,
 			);
 			name = QYFoundation;
 			path = ../QYFoundation;
@@ -272,7 +267,6 @@
 				DE0BCD851BF2D3ED000F15A9 /* NSString+ValidateCheck.m in Sources */,
 				DE3D550F1BF9DF600096A037 /* UIView+QYFrame.m in Sources */,
 				DE0BCD611BF18E06000F15A9 /* QYAppInfo.m in Sources */,
-				DE0BCD8F1BF2DF51000F15A9 /* QYObject.m in Sources */,
 				DE0BCD8C1BF2D924000F15A9 /* NSMutableArray+QYSafe.m in Sources */,
 				DE0BCD7E1BF2D3BE000F15A9 /* NSString+MD5.m in Sources */,
 				DEEBDED51BF1704B003283F2 /* AppDelegate.m in Sources */,

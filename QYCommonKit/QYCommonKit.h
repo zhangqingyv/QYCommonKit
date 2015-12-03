@@ -19,5 +19,7 @@
 #import "UIColor+QYHex.h"
 #import "QYAppInfo.h"
 
+#import "QYMacroDefinition.h"
+
 
 #endif /* QYCommonKit_h */

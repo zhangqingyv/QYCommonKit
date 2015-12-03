@@ -7,7 +7,7 @@
 //
 
 #import "NSMutableArray+QYSafe.h"
-#import "QYObject.h"
+#import "QYMacroDefinition.h"
 
 @implementation NSMutableArray (QYSafe)
 
@@ -21,7 +21,7 @@
 
 + (void)swizzleSelector
 {
-    LKF_swizzleSelector([self class], @selector(setObject:atIndexedSubscript:), @selector(LKF_setObject:atIndexedSubscript:));
+    QY_swizzleSelector([self class], @selector(setObject:atIndexedSubscript:), @selector(LKF_setObject:atIndexedSubscript:));
 }
 
 /**

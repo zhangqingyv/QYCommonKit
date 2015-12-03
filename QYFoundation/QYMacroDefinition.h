@@ -6,96 +6,159 @@
 //  Copyright © 2015年 terry. All rights reserved.
 //
 
+#import <objc/runtime.h>
+#import <sys/time.h>
+#import <pthread.h>
+
 #ifndef QYMacroDefinition_h
 #define QYMacroDefinition_h
 
-//-------------------打印日志-------------------------
-//DEBUG  模式下打印日志,当前行
-#ifdef DEBUG
-#   define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#ifdef __cplusplus
+#define YY_EXTERN_C_BEGIN  extern "C" {
+#define YY_EXTERN_C_END  }
 #else
-#   define DLog(...)
+#define YY_EXTERN_C_BEGIN
+#define YY_EXTERN_C_END
 #endif
 
+YY_EXTERN_C_BEGIN
+
+
+
+#ifndef QY_CLAMP // return the clamped value
+#define QY_CLAMP(_x_, _low_, _high_)  (((_x_) > (_high_)) ? (_high_) : (((_x_) < (_low_)) ? (_low_) : (_x_)))
+#endif
+
+#ifndef QY_SWAP // swap two value
+#define QY_SWAP(_a_, _b_)  do { __typeof__(_a_) _tmp_ = (_a_); (_a_) = (_b_); (_b_) = _tmp_; } while (0)
+#endif
+
+/**
+ Synthsize a weak or strong reference.
+ 
+ Example:
+     @weakify(self)
+     [self doSomething^{
+         @strongify(self)
+         if (!self) return;
+         ...
+     }];
+ 
+ */
+#ifndef weakify
+    #if DEBUG
+        #if __has_feature(objc_arc)
+            #define weakify(object) autoreleasepool{} __weak __typeof__(object) weak##_##object = object;
+        #else
+            #define weakify(object) autoreleasepool{} __block __typeof__(object) block##_##object = object;
+        #endif
+    #else
+        #if __has_feature(objc_arc)
+            #define weakify(object) try{} @finally{} {} __weak __typeof__(object) weak##_##object = object;
+        #else
+            #define weakify(object) try{} @finally{} {} __block __typeof__(object) block##_##object = object;
+        #endif
+    #endif
+#endif
+
+#ifndef strongify
+    #if DEBUG
+        #if __has_feature(objc_arc)
+            #define strongify(object) autoreleasepool{} __typeof__(object) object = weak##_##object;
+        #else
+            #define strongify(object) autoreleasepool{} __typeof__(object) object = block##_##object;
+        #endif
+    #else
+        #if __has_feature(objc_arc)
+            #define strongify(object) try{} @finally{} __typeof__(object) object = weak##_##object;
+        #else
+            #define strongify(object) try{} @finally{} __typeof__(object) object = block##_##object;
+        #endif
+    #endif
+#endif
+
+
+/**
+ Returns a dispatch_time delay from now.
+ */
+static inline dispatch_time_t dispatch_time_delay(NSTimeInterval second) {
+    return dispatch_time(DISPATCH_TIME_NOW, (int64_t)(second * NSEC_PER_SEC));
+}
+
+/**
+ Returns a dispatch_wall_time delay from now.
+ */
+static inline dispatch_time_t dispatch_walltime_delay(NSTimeInterval second) {
+    return dispatch_walltime(DISPATCH_TIME_NOW, (int64_t)(second * NSEC_PER_SEC));
+}
+
+/**
+ Returns a dispatch_wall_time from NSDate.
+ */
+static inline dispatch_time_t dispatch_walltime_date(NSDate *date) {
+    NSTimeInterval interval;
+    double second, subsecond;
+    struct timespec time;
+    dispatch_time_t milestone;
+    
+    interval = [date timeIntervalSince1970];
+    subsecond = modf(interval, &second);
+    time.tv_sec = second;
+    time.tv_nsec = subsecond * NSEC_PER_SEC;
+    milestone = dispatch_walltime(&time, 0);
+    return milestone;
+}
+
+/**
+ Whether in main queue/thread.
+ */
+static inline bool dispatch_is_main_queue() {
+    return pthread_main_np() != 0;
+}
+
+/**
+ Submits a block for asynchronous execution on a main queue and returns immediately.
+ */
+static inline void dispatch_async_on_main_queue(void (^block)()) {
+    if (pthread_main_np()) {
+        block();
+    } else {
+        dispatch_async(dispatch_get_main_queue(), block);
+    }
+}
+
+/**
+ Submits a block for execution on a main queue and waits until the block completes.
+ */
+static inline void dispatch_sync_on_main_queue(void (^block)()) {
+    if (pthread_main_np()) {
+        block();
+    } else {
+        dispatch_sync(dispatch_get_main_queue(), block);
+    }
+}
+
+//----------------------IOS RunTime--------------------------
+static inline void QY_swizzleSelector(Class aClass, SEL originalSelector, SEL swizzledSelector){
+    Method originalMethod = class_getInstanceMethod(aClass, originalSelector);
+    Method swizzledMethod = class_getInstanceMethod(aClass, swizzledSelector);
+    if (class_addMethod(aClass, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))) {
+        class_replaceMethod(aClass, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
+    } else {
+        method_exchangeImplementations(originalMethod, swizzledMethod);
+    }
+}
+
+//----------------------IOS RunTime--------------------------
+
+//-------------------打印日志-------------------------
 
 //重写NSLog,Debug模式下打印日志和当前行数
 #if DEBUG
-#define NSLog(FORMAT, ...) fprintf(stderr,"\nfunction:%s line:%d content:%s\n", __FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+#define NSLog(FORMAT, ...) fprintf(stderr,"(function:%s):%s\n", __FUNCTION__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
 #else
 #define NSLog(FORMAT, ...) nil
 #endif
-
-//DEBUG  模式下打印日志,当前行 并弹出一个警告
-#ifdef DEBUG
-#   define ULog(fmt, ...)  { UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%s\n [Line %d] ", __PRETTY_FUNCTION__, __LINE__] message:[NSString stringWithFormat:fmt, ##__VA_ARGS__]  delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil]; [alert show]; }
-#else
-#   define ULog(...)
-#endif
-
-
-#define ITTDEBUG
-#define ITTLOGLEVEL_INFO     10
-#define ITTLOGLEVEL_WARNING  3
-#define ITTLOGLEVEL_ERROR    1
-
-#ifndef ITTMAXLOGLEVEL
-
-#ifdef DEBUG
-#define ITTMAXLOGLEVEL ITTLOGLEVEL_INFO
-#else
-#define ITTMAXLOGLEVEL ITTLOGLEVEL_ERROR
-#endif
-
-#endif
-
-// The general purpose logger. This ignores logging levels.
-#ifdef ITTDEBUG
-#define ITTDPRINT(xx, ...)  NSLog(@"%s(%d): " xx, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
-#else
-#define ITTDPRINT(xx, ...)  ((void)0)
-#endif
-
-// Prints the current method's name.
-#define ITTDPRINTMETHODNAME() ITTDPRINT(@"%s", __PRETTY_FUNCTION__)
-
-// Log-level based logging macros.
-#if ITTLOGLEVEL_ERROR <= ITTMAXLOGLEVEL
-#define ITTDERROR(xx, ...)  ITTDPRINT(xx, ##__VA_ARGS__)
-#else
-#define ITTDERROR(xx, ...)  ((void)0)
-#endif
-
-#if ITTLOGLEVEL_WARNING <= ITTMAXLOGLEVEL
-#define ITTDWARNING(xx, ...)  ITTDPRINT(xx, ##__VA_ARGS__)
-#else
-#define ITTDWARNING(xx, ...)  ((void)0)
-#endif
-
-#if ITTLOGLEVEL_INFO <= ITTMAXLOGLEVEL
-#define ITTDINFO(xx, ...)  ITTDPRINT(xx, ##__VA_ARGS__)
-#else
-#define ITTDINFO(xx, ...)  ((void)0)
-#endif
-
-#ifdef ITTDEBUG
-#define ITTDCONDITIONLOG(condition, xx, ...) { if ((condition)) { \
-ITTDPRINT(xx, ##__VA_ARGS__); \
-} \
-} ((void)0)
-#else
-#define ITTDCONDITIONLOG(condition, xx, ...) ((void)0)
-#endif
-
-#define ITTAssert(condition, ...)                                       \
-do {                                                                      \
-    if (!(condition)) {                                                     \
-        [[NSAssertionHandler currentHandler]                                  \
-         handleFailureInFunction:[NSString stringWithUTF8String:__PRETTY_FUNCTION__] \
-         file:[NSString stringWithUTF8String:__FILE__]  \
-         lineNumber:__LINE__                                  \
-         description:__VA_ARGS__];                             \
-    }                                                                       \
-} while(0)
 
 //---------------------打印日志--------------------------
 
@@ -131,31 +194,7 @@ do {                                                                      \
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 
-
 //----------------------系统----------------------------
-
-
-//----------------------内存----------------------------
-
-//使用ARC和不使用ARC
-#if __has_feature(objc_arc)
-//compiling with ARC
-#else
-// compiling without ARC
-#endif
-
-#pragma mark - common functions
-#define RELEASE_SAFELY(__POINTER) { [__POINTER release]; __POINTER = nil; }
-
-//释放一个对象
-#define SAFE_DELETE(P) if(P) { [P release], P = nil; }
-
-#define SAFE_RELEASE(x) [x release];x=nil
-
-
-
-//----------------------内存----------------------------
-
 
 //----------------------图片----------------------------
 
@@ -171,90 +210,13 @@ do {                                                                      \
 //建议使用前两种宏定义,性能高于后者
 //----------------------图片----------------------------
 
-
-
-//----------------------颜色类---------------------------
-// rgb颜色转换（16进制->10进制）
-#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
-
-//带有RGBA的颜色设置
-#define COLOR(R, G, B, A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
-
-// 获取RGB颜色
-#define RGBA(r,g,b,a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
-#define RGB(r,g,b) RGBA(r,g,b,1.0f)
-
-//背景色
-#define BACKGROUND_COLOR [UIColor colorWithRed:242.0/255.0 green:236.0/255.0 blue:231.0/255.0 alpha:1.0]
-
-//清除背景色
-#define CLEARCOLOR [UIColor clearColor]
-
-#pragma mark - color functions
-#define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
-#define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
-
-//----------------------颜色类--------------------------
-
-//----------------------其他----------------------------
-
-//方正黑体简体字体定义
-#define FONT(F) [UIFont fontWithName:@"FZHTJW--GB1-0" size:F]
-
-//设置View的tag属性
-#define VIEWWITHTAG(_OBJECT, _TAG)    [_OBJECT viewWithTag : _TAG]
-//程序的本地化,引用国际化的文件
-#define MyLocal(x, ...) NSLocalizedString(x, nil)
-
-//G－C－D
-#define BACK(block) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block)
-#define MAIN(block) dispatch_async(dispatch_get_main_queue(),block)
-
 //NSUserDefaults 实例化
 #define USER_DEFAULT [NSUserDefaults standardUserDefaults]
 
 
 //由角度获取弧度 有弧度获取角度
-#define degreesToRadian(x) (M_PI * (x) / 180.0)
-#define radianToDegrees(radian) (radian*180.0)/(M_PI)
+#define degreesFromRadian(radian) (radian*180.0)/(M_PI)
+#define radianFromDegress() (M_PI * (x) / 180.0)
 
-
-
-//单例化一个类
-#define SYNTHESIZE_SINGLETON_FOR_CLASS(classname) \
-\
-static classname *shared##classname = nil; \
-\
-+ (classname *)shared##classname \
-{ \
-    @synchronized(self) \
-    { \
-        if (shared##classname == nil) \
-        { \
-            shared##classname = [[self alloc] init]; \
-        } \
-    } \
-    \
-    return shared##classname; \
-} \
-\
-+ (id)allocWithZone:(NSZone *)zone \
-{ \
-    @synchronized(self) \
-    { \
-        if (shared##classname == nil) \
-        { \
-            shared##classname = [super allocWithZone:zone]; \
-            return shared##classname; \
-        } \
-    } \
-    \
-    return nil; \
-} \
-\
-- (id)copyWithZone:(NSZone *)zone \
-{ \  
-    return self; \  
-}
-
+YY_EXTERN_C_END
 #endif /* QYMacroDefinition_h */
